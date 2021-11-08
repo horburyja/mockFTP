@@ -61,11 +61,6 @@ void doLSCommand(int sid)
    char* buf;
    c.code = htonl(CC_LS);
    memset(c.arg, 0, sizeof(c.arg));
-   /*
-     TODO: Send Command c to the server. Then, use recv to read the response of the server into Payload p. Following this payload, the actual actual message will be sent to the client by the server. Payload p has a length field, which is the length of this message. 
-
-     You should store the list of files in buf. 
-    */
     
     // send command to server
     status = send(sid, &c, sizeof(c), 0);
@@ -80,7 +75,6 @@ void doLSCommand(int sid)
     // store list of files in buffer
     buf = malloc(sizeof(char)*p.length);
     
-    // not really sure what this does :P
     int rec = 0;
     int rem = p.length;
     
@@ -107,12 +101,6 @@ void doGETCommand(int sid)
 	printf("Give a filename:");
 	char fName[256];
 	scanf("%s",fName);	
-	/*
-	 TODO: Prepare Command c, send it, and recv back into Payload p. 
-	
-	 
-	 Something that is important to note: payload p contains the code and length as integers in network byte order. You need to use the proper function to convert p.length to host byte order. What function would you use for this? It's either htonl, htons, ntohl, or ntohs.
-	*/
     
 	// prepare command
 	c.code = htonl(CC_GET);
@@ -127,8 +115,6 @@ void doGETCommand(int sid)
 	status = recv(sid, &p, sizeof(p), 0);
 	checkError(status, __LINE__);
 	
-	// some things I still don't understand
-	//int fs = getFileSize(c.arg);
 	p.code = ntohl(PL_FILE);
 	p.length = ntohl(p.length);
     
@@ -144,11 +130,7 @@ void doPUTCommand(int sid)
    printf("Give a local filename:");
    char fName[256];
    scanf("%s",fName);
-   /*
-     TODO: Prepare Command c, and send it to the server. Then, prepare the Payload p, and send it to the server.
-
-     Be sure c.code, p.length are in network byte order. 
-    */
+   
    c.code = htonl(CC_PUT);
    strncpy(c.arg,fName,255);
    c.arg[255] = 0;

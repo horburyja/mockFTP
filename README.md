@@ -9,7 +9,7 @@ sending or receiving a Payload struct, followed by text or the contents of a fil
 and CC_EXIT are used in the code field of the Command struct, to indicate what command is being performed.
 
 The Payload indicates whether it will be followed by text, or the contents of the file. The code field of the
-Payload is either PL TXT or PL FILE, and the length field indicates how many bytes are being sent.
+Payload is either PL_TXT or PL_FILE, and the length field indicates how many bytes are being sent.
 
 ## LS Command
 
