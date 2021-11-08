@@ -44,11 +44,7 @@ int getFileSize(char* fName)
 }
 
 void sendFileOverSocket(char* fName,int chatSocket)
-{
-  /*
-    TODO: Open the file, and send it over the socket.
-   */
-   
+{  
    // open file and allocate space for buffer
    FILE* fp = fopen(fName, "rw");
    char* buf = malloc(sizeof(char)*getFileSize(fName));
@@ -71,13 +67,7 @@ void sendFileOverSocket(char* fName,int chatSocket)
 }
 
 void receiveFileOverSocket(int sid,char* fname,char* ext,int fSize)
-{
-
-	/*
-	TODO: fsize is the size of the file in bytes. Allocate a buffer to store the file, and use the recv function to recieve the file.
-	
-	*/
-	
+{	
 	// allocate buffer to store file
 	char* buf = malloc(sizeof(char)*fSize);
 	
@@ -95,9 +85,6 @@ void receiveFileOverSocket(int sid,char* fname,char* ext,int fSize)
 	strcpy(fn,fname);
 	strcat(fn,ext);
 	FILE* fd = fopen(fn,"w");
-	/*
-	TODO: fwrite the file contents to fd, close fd, and then free the allocated buffer.
-	*/
 	
 	// fwrite file to fd
 	fwrite(buf, 1, fSize, fd);
